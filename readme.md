@@ -44,7 +44,7 @@ The displaying functionality happens in the **display_cronetab_jobs** function. 
 
 Creating task functionality is stored in the **insert_a_job** function. This function runs several helper functions to get the needed input from the user (minute,hour,day,month,day of the week and the command itself). After that, the concatenated string is inserted into the Crontab file. The insert function makes use of the validation functions, therefore all the input besides the command is checked, so it is a legal expression recognized by the cron.
 
-## Update a task ###
+### Update a task ###
 
 Updating task functionality is stored in the **edit_a_job** function. This function crompts the user for a number of the task that should be edited and which time part of the job should be edited. We copy the array into our mycron file, remove the job that should be edited while storing it, then updating the to be edited array, appending it to the end of the jobs array and echoing it all into the crontab file. Then, the mycron temporary file is removed.
 
