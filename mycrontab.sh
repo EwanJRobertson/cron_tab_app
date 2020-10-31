@@ -356,14 +356,16 @@ function display_cronetab_jobs () {
     echo "Displaying all jobs"
     crontab -l > mycron
     declare -a array
+    
     while read -r line;
     do
         array+=("$(echo "$line")")
     done<mycron
-
+    temp_count = 1
     for i in "${array[@]}"
         do
-            echo "$i"
+            echo "$temp_count. $i"
+            ((temp_count=temp_count + 1))
         done
     rm mycron
 }
