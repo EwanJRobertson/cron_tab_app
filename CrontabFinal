@@ -21,6 +21,7 @@ function split_cronjobs_into_array () {
     unset cronjobs_array
 
     # Echo current crontab into temporary file
+    mycron=$(mktemp)
     crontab -l > mycron
 
     #  Fill array with cron jobs 
@@ -366,6 +367,7 @@ function insert_a_job () {
 
     read job_command
 
+    mycron=$(mktemp)
     crontab -l > mycron
     # Echo new cron into cron file
     echo "$minute $hour $day $month $day_of_week $job_command" >> mycron
@@ -453,6 +455,7 @@ function edit_a_job () {
     cronjobs_array+=("${cronjob_to_edit[0]} ${cronjob_to_edit[1]} ${cronjob_to_edit[2]} ${cronjob_to_edit[3]} ${cronjob_to_edit[4]} ${cronjob_to_edit[5]}")
 
     # Store edited jobs array into mycron then crontab
+    mycron=$(mktemp)
     printf "%s\n" "${cronjobs_array[@]}" > mycron
     crontab mycron
     rm mycron
@@ -481,6 +484,7 @@ function remove_a_job () {
         done
     done
     # Store cronjobs into temp file then crontab
+    mycron=$(mktemp)
     printf "%s\n" "${cronjobs_array[@]}" > mycron
     crontab mycron
     rm mycron
@@ -503,12 +507,14 @@ function exit_app () {
 while $is_running
 do
     # Printing out the options menu
+    echo ""
     echo "1 . Display crontab jobs"
     echo "2 . Insert a job"
     echo "3 . Edit a job"
     echo "4 . Remove a job"
     echo "5 . Remove all jobs"
     echo "9 . Exit" 
+    echo ""
 
     # Reading the user's input and storing it
     read choice
