@@ -49,7 +49,7 @@ function getMinute (){
     echo $minute
 }
 
-# Returns vali hour value
+# Returns valid hour value
 function getHour (){
     validation_running=true
     while $validation_running
